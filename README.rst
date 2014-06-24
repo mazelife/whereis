@@ -8,7 +8,7 @@ However, one of the problems is that often our staff are deployed to areas with 
 The goal is to take in the information from the email - time, sender, and freetext subject line, and convert it to a normalized record that can be used to update the whereis.dimagi.com database.
 Your source data for lookups will be geonames. http://www.geonames.org/
 
-You can use whatever data format you'd like to get the data, although we recommend either using the search api ( http://www.geonames.org/export/geonames-search.html ) or the text-download format http://download.geonames.org/export/dump/ . For text-download, the cities15000.zip file has a good set of locations to start with. For api calls you can use username/password (dimagi/dimagi). Note that there is an hourly API limit of 2000 calls per hour, so be slightly judicious with API requests.
+You can use whatever data format you'd like to get the data, although we recommend either using the search api ( http://www.geonames.org/export/geonames-search.html ) or the text-download format http://download.geonames.org/export/dump/ . For text-download, the cities15000.zip file has a good set of locations to start with. Note that there is an hourly API limit of 2000 calls per hour, so be slightly judicious with API requests.
 
 Likewise, you can assume any format you want for the incoming email data. For example, one source data format might be an array formatted like::
 
