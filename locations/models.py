@@ -2,6 +2,9 @@ from django.db import models
 from locations.managers import LocationManager
 
 
+# FIXME: Create a "place" (country? city? town?) model to help aggregate locations.
+
+
 class Location(models.Model):
     """
     A model of a user's reported location.

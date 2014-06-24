@@ -7,6 +7,9 @@ from whereis.geo import find_location, LocationLookupError
 
 
 class CreateLocation(FormView):
+    """
+    Allows a user to report their location through the web.
+    """
 
     template_name = "locations/create.html"
     form_class = forms.Location
