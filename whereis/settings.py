@@ -83,6 +83,10 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 
+TEMPLATE_DIRS = (
+    os.path.join(BASE_DIR, "whereis", "templates"),
+)
+
 try:
     from local_settings import *
 except ImportError:

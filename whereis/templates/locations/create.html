@@ -1,0 +1,16 @@
+<html>
+    <head>
+        <title>Add a location</title>
+    </head>
+    <body>
+        {% if location %}
+        <h1>Location Added!</h1>
+        <pre>#FIXME: Put more data here, maybe an embedded map?</pre>
+        {% else %}
+        <form action="" method="post">{% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Add" />
+        </form>
+        {% endif %}
+    </body>
+</html>
