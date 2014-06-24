@@ -3,7 +3,6 @@ from email import parser
 from email.utils import parseaddr, parsedate_tz
 import poplib
 
-
 from dateutil.tz import tzoffset
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
@@ -53,7 +52,3 @@ def parse_email(email):
         "address": parseaddr(email["From"])[1],
     }
 
-
-if __name__ == "__main__":
-    emails = get_emails(EMAIL_ADDRESS, EMAIL_PASSWORD)
-    locations = map(parse_email, emails)

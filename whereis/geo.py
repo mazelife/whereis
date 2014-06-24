@@ -54,6 +54,7 @@ def find_location(email):
     result = query_api(email["subject"])
     if result["totalResultsCount"] == 0:
         raise LocationLookupError("Nothing matched the given location {}.".format(email["subject"]))
+    # FIXME: Add the ability to choose different strategies for choosing a match.
     loc_data = result["geonames"][0]
     country = loc_data["countryName"]
     city = loc_data["name"] if loc_data["fclName"].startswith("city") else ""

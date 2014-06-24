@@ -1,4 +1,5 @@
 from django.db import models
+
 from whereis.geo import haversine
 
 
@@ -14,6 +15,7 @@ class LocationQuerySet(models.query.QuerySet):
         """
         Return the location nearest to the given lat/long.
         """
+        # FIXME: This could be quite slow. Perhaps employ geohashing or something similar to speed lookups.
         shortest_distance = None
         closest_location = None
         for loc in self.all():
