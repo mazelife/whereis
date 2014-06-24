@@ -28,7 +28,6 @@ Suggestions for bonus points and task extensions (in no particular order):
     * Choice of place by closest distance from person's most recently seen location
     * Add the ability to query someone's location at a given date/time.
     * Draw the outputted data on a map (we know we already have this, but you can take your own crack at it).
-    google map it?
     * Reverse engineer/design the http://whereis.dimagi.com schema including history, people, places, etc.
     * Calculated Badges/Awards ("most distance covered", "biggest homebody", etc. extra bonus points for creative badges)
     * Design and implement API to re-POST the data to http://whereis.dimagi.com for us to integrate with.
