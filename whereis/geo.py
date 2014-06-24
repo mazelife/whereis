@@ -6,7 +6,8 @@ def get_query_params(place_name, params=None):
         params = {
             "username": "dimagi",
             "maxrows": 10,
-            "type": "json"
+            "type": "json",
+            "lang": "en",
         }
     params["q"] = place_name
     return params

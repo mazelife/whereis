@@ -3,15 +3,23 @@ from email import parser
 from email.utils import parseaddr, parsedate_tz
 import poplib
 
+
 from dateutil.tz import tzoffset
+from django.conf import settings
+from django.core.exceptions import ImproperlyConfigured
 
 
-EMAIL_ADDRESS = "whereisthedimagiemployee@gmail.com"
-EMAIL_PASSWORD = "horse house house horse"
-
-
-class SubjectParseException(Exception):
-    """ Raised when a subject line seems incorrectly formatted. """
+def get_credentials():
+    """
+    Get the correct email/password from the django settings file.
+    """
+    email = getattr(settings, "LOCATIONS_EMAIL_ADDRESS", None)
+    password = getattr(settings, "LOCATIONS_EMAIL_PASSWORD", None)
+    if not email:
+        raise ImproperlyConfigured("The LOCATIONS_EMAIL_ADDRESS setting is missing.")
+    if not password:
+        raise ImproperlyConfigured("The LOCATIONS_EMAIL_PASSWORD setting is missing.")
+    return email, password
 
 
 def get_emails(email, password):
@@ -19,7 +27,6 @@ def get_emails(email, password):
     Takes a username/password for a POP account and returns a list of
     `parsed <https://docs.python.org/2/library/email.parser.html>`_ email messages.
     """
-
     pop_conn = poplib.POP3_SSL('pop.gmail.com')
     pop_conn.user(email)
     pop_conn.pass_(password)
@@ -33,21 +40,20 @@ def get_emails(email, password):
     return messages
 
 
-def parse_data(email):
+def parse_email(email):
     """
     Extract needed data from a parsed email object.
     """
     time_tuple = parsedate_tz(email["date"])
-    import pdb; pdb.set_trace()
     tzinfo = tzoffset(None, time_tuple[-1])
     date = datetime(*time_tuple[:6], tzinfo=tzinfo)
     return {
-        "name": email["subject"],
+        "subject": email["subject"],
         "date": date,
-        "email": parseaddr(email["From"])[1],
+        "address": parseaddr(email["From"])[1],
     }
 
 
 if __name__ == "__main__":
     emails = get_emails(EMAIL_ADDRESS, EMAIL_PASSWORD)
-    locations = map(parse_data, emails)
+    locations = map(parse_email, emails)
