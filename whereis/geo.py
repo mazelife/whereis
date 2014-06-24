@@ -1,3 +1,5 @@
+from math import radians, cos, sin, asin, sqrt
+
 from decimal import Decimal, InvalidOperation
 from django.conf import settings
 from django.contrib.auth.models import User
@@ -73,3 +75,22 @@ def find_location(email):
     }
 
 
+def haversine(lon1, lat1, lon2, lat2):
+    """
+    Calculate the great circle distance between two points
+    on the earth (specified in decimal degrees).
+
+    >>> #The distance between Jakarta and Richmond, VA is about 10,247 miles...
+    >>> int(haversine(Decimal('106.84513'), Decimal('-6.21462'), Decimal('-77.46026'), Decimal('37.55376')))
+    10247
+
+    """
+    # convert decimal degrees to radians
+    lon1, lat1, lon2, lat2 = map(radians, [lon1, lat1, lon2, lat2])
+    # use haversine haversine formula to get the distance
+    dlon = lon2 - lon1
+    dlat = lat2 - lat1
+    a = sin(dlat/2)**2 + cos(lat1) * cos(lat2) * sin(dlon/2)**2
+    c = 2 * asin(sqrt(a))
+    # 3956 miles is the great circle distance of earth
+    return 3956 * c

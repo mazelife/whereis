@@ -1,4 +1,5 @@
 from django.db import models
+from locations.managers import LocationManager
 
 
 class Location(models.Model):
@@ -12,6 +13,8 @@ class Location(models.Model):
     city = models.CharField(max_length=255, blank=True)
     latitude = models.DecimalField(max_digits=10, decimal_places=7)
     longitude = models.DecimalField(max_digits=10, decimal_places=7)
+
+    objects = LocationManager()
 
     class Meta:
         get_latest_by = "timestamp"
